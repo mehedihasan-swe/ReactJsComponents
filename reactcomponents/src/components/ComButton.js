@@ -1,4 +1,4 @@
-import { Badge, badgeClasses, Button, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Stack, TextField, Tooltip } from '@mui/material'
+import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Stack, TextField, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useState } from 'react'
@@ -15,12 +15,53 @@ const CartBadge = styled(Badge)`
 
 
 
-
 export default function ComButton() {
-  const [data, setData] = useState('');
-  const [radData, setradData] = useState('')
+
+  const [ data, setData ] = useState('');
+  const [ radData, setradData ] = useState('')
+  const [ language, setLanguage ] = useState([]);
+  
+  const handlechange = (e) => {
+    const index = language.indexOf(e.target.value);
+    if(index===-1){
+      setLanguage([...language, e.target.value])
+    } else{
+      setLanguage(language.filter((item)=> item !== e.target.value))
+    }
+  }
+
   return (
     <>
+
+      <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignContent="center" marginTop="20vh">
+        <FormControl>
+          <FormLabel>Your Favourite language</FormLabel>
+          <FormGroup>
+            <FormControlLabel
+              value="Spanish"
+              label="Spanish"
+              control={<Checkbox checked ={ language.includes('Spanish')} onChange={handlechange} />}
+            />
+             <FormControlLabel
+              value="English"
+              label="English"
+              control={<Checkbox checked ={ language.includes('English')} onChange={handlechange} />}
+             />
+            <FormControlLabel
+              value="Bangla"
+              label="Bangla"
+              control={<Checkbox checked ={ language.includes('Bangla')} onChange={handlechange} />}
+            />
+          </FormGroup>
+        </FormControl>
+      </Stack>
+
+
+      <Stack>
+        {language} 
+      </Stack>
+
+
       <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignContent="center" marginTop="30vh">
 
         <Button variant="text">Text</Button>
@@ -100,31 +141,32 @@ export default function ComButton() {
       <Stack direction='row' spacing={2} alignContent='center' marginTop="50px" justifyContent='center'>
         <FormControl>
           <FormLabel><p>Your language</p></FormLabel>
-          <RadioGroup 
+          <RadioGroup
             name='language you speak'
             aria-labelledby='language_you_speak'
             value={data}
-            onChange={e=>setData(e.target.value)}
+            onChange={e => setData(e.target.value)}
+            row
           >
-           <FormControlLabel 
-           value='Spanish'
-           control={<Radio/>}
-           label="Spanish" 
-           />
 
-          <FormControlLabel 
-           value='German'
-           control={<Radio/>}
-           label="German" 
-          
-           />
+            <FormControlLabel
+              value='Spanish'
+              control={<Radio size='large' color='secondary' />}
+              label="Spanish"
+            />
 
-          <FormControlLabel 
-           value='English'
-           control={<Radio/>}
-           label="English"
-          
-           />
+            <FormControlLabel
+              value='German'
+              control={<Radio size='large' color='secondary' />}
+              label="German"
+            />
+
+            <FormControlLabel
+              value='English'
+              control={<Radio size='large' color='secondary' />}
+              label="English"
+            />
+
 
           </RadioGroup>
         </FormControl>
