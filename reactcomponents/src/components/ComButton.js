@@ -1,9 +1,10 @@
-import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Stack, TextField, Tooltip } from '@mui/material'
+import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Rating, Stack, Switch, TextField, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useState } from 'react'
 import { styled } from '@mui/system';
 import MailIcon from '@mui/icons-material/Mail';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 const CartBadge = styled(Badge)`
@@ -17,21 +18,57 @@ const CartBadge = styled(Badge)`
 
 export default function ComButton() {
 
-  const [ data, setData ] = useState('');
-  const [ radData, setradData ] = useState('')
-  const [ language, setLanguage ] = useState([]);
-  
+  const [data, setData] = useState('');
+  const [star, setStar] = useState(2);
+  const [radData, setradData] = useState('')
+  const [language, setLanguage] = useState([]);
+  const [switchCondition, setChecked] = useState(false);
   const handlechange = (e) => {
-    const index = language.indexOf(e.target.value);
-    if(index===-1){
+    const index = language.indexOf(e.target.value); 
+    if (index === -1) {
       setLanguage([...language, e.target.value])
-    } else{
-      setLanguage(language.filter((item)=> item !== e.target.value))
+    } else {
+      setLanguage(language.filter((item) => item !== e.target.value))
     }
   }
 
   return (
     <>
+
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
+        <FormControlLabel
+          label="Dark Mode"
+          control={
+            <Rating
+            value={star}
+            precision={.2}
+              onChange={(event,neewvalue)=>{
+                setStar(neewvalue)
+              }}
+              icon={<FavoriteIcon fontSize="inherit" color='error' />}
+              emptyIcon={<FavoriteIcon style={{ opacity: 0.9 }} fontSize="inherit"  color="primary"/>}
+            />
+          }
+        />
+      </Stack>
+     
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
+        <FormControlLabel
+          label="Dark Mode"
+          control={
+            <Switch
+              checked={switchCondition}
+              onChange={e => setChecked(e.target.checked)}
+            />
+          }
+        />
+      </Stack>
+
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
+        {switchCondition ? "True" : "False"}
+      </Stack>
+
+      {/* Swtch End */}
 
       <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignContent="center" marginTop="20vh">
         <FormControl>
@@ -40,17 +77,17 @@ export default function ComButton() {
             <FormControlLabel
               value="Spanish"
               label="Spanish"
-              control={<Checkbox checked ={ language.includes('Spanish')} onChange={handlechange} />}
+              control={<Checkbox checked={language.includes('Spanish')} onChange={handlechange} />}
             />
-             <FormControlLabel
+            <FormControlLabel
               value="English"
               label="English"
-              control={<Checkbox checked ={ language.includes('English')} onChange={handlechange} />}
-             />
+              control={<Checkbox checked={language.includes('English')} onChange={handlechange} />}
+            />
             <FormControlLabel
               value="Bangla"
               label="Bangla"
-              control={<Checkbox checked ={ language.includes('Bangla')} onChange={handlechange} />}
+              control={<Checkbox checked={language.includes('Bangla')} onChange={handlechange} />}
             />
           </FormGroup>
         </FormControl>
@@ -58,7 +95,7 @@ export default function ComButton() {
 
 
       <Stack>
-        {language} 
+        {language}
       </Stack>
 
 
@@ -148,6 +185,14 @@ export default function ComButton() {
             onChange={e => setData(e.target.value)}
             row
           >
+
+            <FormControl
+              value="Spanish"
+              control={<Radio size='large' color='secondary' />}
+              label="Spanish"
+            />
+
+
 
             <FormControlLabel
               value='Spanish'
