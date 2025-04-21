@@ -1,4 +1,4 @@
-import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Rating, Stack, Switch, TextField, Tooltip } from '@mui/material'
+import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, MenuItem, Radio, RadioGroup, Rating, Select, Stack, Switch, TextField, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useState } from 'react'
@@ -19,39 +19,60 @@ const CartBadge = styled(Badge)`
 export default function ComButton() {
 
   const [data, setData] = useState('');
+  const [datas, setDatas] = useState('');
   const [star, setStar] = useState(2);
   const [radData, setradData] = useState('')
   const [language, setLanguage] = useState([]);
   const [switchCondition, setChecked] = useState(false);
   const handlechange = (e) => {
-    const index = language.indexOf(e.target.value); 
+    const index = language.indexOf(e.target.value);
     if (index === -1) {
       setLanguage([...language, e.target.value])
     } else {
       setLanguage(language.filter((item) => item !== e.target.value))
     }
   }
+  const selectChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+  
+    setDatas(typeof value === 'string' ? value.split(',') : value);
+  };
+  
 
   return (
     <>
+
+
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5} sx={{ width: '50%' }}>
+        <Select label="language" value={datas} onChange={selectChange} fullWidth>
+          <MenuItem value="Spanish">Spanish</MenuItem>
+          <MenuItem value="English">English</MenuItem>
+          <MenuItem value="French">French</MenuItem>
+        </Select>
+      </Stack>
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5} sx={{ width: '50%' }}>
+      {datas}
+      </Stack>
 
       <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
         <FormControlLabel
           label="Dark Mode"
           control={
             <Rating
-            value={star}
-            precision={.2}
-              onChange={(event,neewvalue)=>{
+              value={star}
+              precision={.2}
+              onChange={(event, neewvalue) => {
                 setStar(neewvalue)
               }}
               icon={<FavoriteIcon fontSize="inherit" color='error' />}
-              emptyIcon={<FavoriteIcon style={{ opacity: 0.9 }} fontSize="inherit"  color="primary"/>}
+              emptyIcon={<FavoriteIcon style={{ opacity: 0.9 }} fontSize="inherit" color="primary" />}
             />
           }
         />
       </Stack>
-     
+
       <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
         <FormControlLabel
           label="Dark Mode"
