@@ -1,4 +1,4 @@
-import { Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, MenuItem, Radio, RadioGroup, Rating, Select, Stack, Switch, TextField, Tooltip } from '@mui/material'
+import { Autocomplete, Badge, badgeClasses, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, InputAdornment, MenuItem, Radio, RadioGroup, Rating, Select, Stack, Switch, TextField, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useState } from 'react'
@@ -19,7 +19,7 @@ const CartBadge = styled(Badge)`
 export default function ComButton() {
 
   const [data, setData] = useState('');
-  const [datas, setDatas] = useState('');
+  const [datas, setDatas] = useState([]);
   const [star, setStar] = useState(2);
   const [radData, setradData] = useState('')
   const [language, setLanguage] = useState([]);
@@ -33,27 +33,48 @@ export default function ComButton() {
     }
   }
   const selectChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-  
+    // const { target: { value } } = event;
+    const value = event.target.value;
     setDatas(typeof value === 'string' ? value.split(',') : value);
   };
-  
-
+  const [values, setValues] = useState(null);
+  const options = ['React', 'Vue', 'Angular'];
   return (
     <>
 
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
+        <Autocomplete sx={{ width: '100%' }}
+          value={values}
+          onChange={(event, newValue) => {
+            setValues(newValue)
 
-      <Stack direction="row" spacing={2} justifyContent="center" margin={5} sx={{ width: '50%' }}>
-        <Select label="language" value={datas} onChange={selectChange} fullWidth>
+            console.log('event:', event);       // DOM Event
+            console.log('newValue:', newValue); // সিলেক্ট করা মান
+          }}
+          options={options}
+          renderInput={(params) => <TextField {...params} label="Framework" />}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2} justifyContent="center" margin={5} sx={{
+        width: '100%', display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <Select label="language" value={datas} onChange={selectChange} multiple
+          fullWidth sx={{
+            width: '50%', display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
           <MenuItem value="Spanish">Spanish</MenuItem>
           <MenuItem value="English">English</MenuItem>
           <MenuItem value="French">French</MenuItem>
         </Select>
       </Stack>
+
+
       <Stack direction="row" spacing={2} justifyContent="center" margin={5} sx={{ width: '50%' }}>
-      {datas}
+        {datas}
       </Stack>
 
       <Stack direction="row" spacing={2} justifyContent="center" margin={5}>
