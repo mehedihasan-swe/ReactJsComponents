@@ -14,7 +14,7 @@ export class TemperatureInput extends Component {
       <div>
         <fieldset>
             <p>Enter Temperature in {Scalenames[scales]}</p> <br/>
-            <input type='text' onChange={tempChange} value={temperature}/>
+            <input type='text' onChange={(e)=>tempChange(e, scales)} value={temperature}/>
         </fieldset>
         
       </div>
