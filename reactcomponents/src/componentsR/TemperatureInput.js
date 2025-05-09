@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import BoilingVerdict from './BoilingVerdict';
-
 
 const Scalenames={
      c:"Celcious",
@@ -8,27 +6,17 @@ const Scalenames={
 }
 
 export class TemperatureInput extends Component {
-        state = {
-        temperature : 0,
-        
-    }
-    tempChange = (e) =>{
-        this.setState({
-            temperature:e.target.value
-
-        });
-    }
-
+   
   render() {
-    const {temperature}=this.state;
-    const {scales}=this.props
+    const {temperature,scales,tempChange}=this.props;
+    
     return (
       <div>
         <fieldset>
-            <lagend>Enter Temperature in {Scalenames[scales]}</lagend> <br/>
-            <input type='text' onChange={this.tempChange} value={temperature}></input>
+            <p>Enter Temperature in {Scalenames[scales]}</p> <br/>
+            <input type='text' onChange={tempChange} value={temperature}/>
         </fieldset>
-        <BoilingVerdict celcious={temperature}/>
+        
       </div>
     )
   }
