@@ -21,13 +21,14 @@ export class Calculator extends Component {
 
   render() {
     const { temperature, scales } = this.state;
-    const celsius = scales === 'f' ? convert(temperature, toCelsius) : temperature;
     const fahrenheit = scales === 'c' ? convert(temperature, toFahrenheit) : temperature;
+    const celsius = scales === 'f' ? convert(temperature, toCelsius) : temperature;
+    
     return (
       <div>
 
-        <TemperatureInput scales="c" temperature={fahrenheit} tempChange={this.tempChange} />
-        <TemperatureInput scales="f" temperature={celsius} tempChange={this.tempChange} />
+        <TemperatureInput scales="c" temperature={celsius} tempChange={this.tempChange} />
+        <TemperatureInput scales="f" temperature={fahrenheit} tempChange={this.tempChange} />
         <BoilingVerdict celcious={parseFloat(temperature)} />
 
       </div>
