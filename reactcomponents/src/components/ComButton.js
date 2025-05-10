@@ -13,7 +13,19 @@ const CartBadge = styled(Badge)`
     right: -6px;
   }
 `;
+// const Btns = styled(Button)`
+//   &.${buttonClasses.root} {
+//     padding: 15px 35px;
+//     background-color: purple;
+//     color: white;
+//     font-size: 18px;
+//   }
 
+//   &:hover {
+//     background-color: darkviolet;
+//     cursor: pointer;
+//   }
+// `;
 
 
 export default function ComButton() {

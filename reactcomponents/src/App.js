@@ -1,6 +1,8 @@
 
 import './App.css';
-import Calculator from './componentsR/Calculator';
+import Clickcounter from './Hoc/Clickcounter';
+import OnMouseHover from './Hoc/OnMouseHover';
+// import Calculator from './componentsR/Calculator';
 
 
 // import ComButton from './components/ComButton';
@@ -11,9 +13,12 @@ import Calculator from './componentsR/Calculator';
 function App() {
   return (
     <div className="App">
-      
-     <Calculator/>
+      <Clickcounter/>
+      <OnMouseHover/>
 
+      
+    
+        {/* <Calculator/> */}
       {/* <Components/> */}
      {/* <ComButton/> */}
     </div>
