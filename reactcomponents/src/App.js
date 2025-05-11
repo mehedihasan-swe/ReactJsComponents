@@ -1,7 +1,10 @@
 
 import './App.css';
-import Clickcounter from './Hoc/Clickcounter';
-import OnMouseHover from './Hoc/OnMouseHover';
+import ClickCounters from './RenderProps/ClickCounters';
+import Counter from './RenderProps/Counter';
+import Hovercounters from './RenderProps/Hovercounters';
+// import Clickcounter from './Hoc/Clickcounter';
+// import OnMouseHover from './Hoc/OnMouseHover';
 // import Calculator from './componentsR/Calculator';
 
 
@@ -13,11 +16,14 @@ import OnMouseHover from './Hoc/OnMouseHover';
 function App() {
   return (
     <div className="App">
-      <Clickcounter/>
-      <OnMouseHover/>
 
       
-    
+      <Counter render={(count,increament)=>(<ClickCounters count={count} increament={increament}/>)}/>
+      <Counter render={(count,increament)=>(<Hovercounters count={count} increament={increament}/>)}/>
+
+      
+      {/* <Clickcounter/>
+      <OnMouseHover/> */}
         {/* <Calculator/> */}
       {/* <Components/> */}
      {/* <ComButton/> */}
